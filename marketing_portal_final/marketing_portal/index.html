@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Garbe Marketing Service Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9fb;
+      color: #333;
+    }
+    header {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    p.description {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .card {
+      display: flex;
+      align-items: flex-start;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .card .icon {
+      font-size: 32px;
+      margin-right: 16px;
+      line-height: 1;
+    }
+    .card .title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .card .desc {
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header id="banner"></header>
+  <div class="container">
+    <h1>Marketing Service Portal</h1>
+    <p class="description">Stellen Sie hier alle Anfragen an die Marketingabteilung. Wählen Sie einen Bereich aus, um Ihr Anliegen zu übermitteln.</p>
+    <a class="card" href="allgemein.html">
+      <div class="icon">💬</div>
+      <div>
+        <div class="title">Allgemeine Marketing‑Anfragen</div>
+        <div class="desc">Fragen zur Markenstrategie, Zielgruppen oder allgemeine Beratung.</div>
+      </div>
+    </a>
+    <a class="card" href="kampagne.html">
+      <div class="icon">📣</div>
+      <div>
+        <div class="title">Kampagnen & Projekte</div>
+        <div class="desc">Neue Kampagnen, Events oder Projekte anfragen.</div>
+      </div>
+    </a>
+    <a class="card" href="design.html">
+      <div class="icon">🎨</div>
+      <div>
+        <div class="title">Design & Kreativleistungen</div>
+        <div class="desc">Grafiken, Präsentationen oder Medien anfordern.</div>
+      </div>
+    </a>
+    <a class="card" href="zugang.html">
+      <div class="icon">🔐</div>
+      <div>
+        <div class="title">Zugänge & Tools</div>
+        <div class="desc">Zugriff auf Marketing‑Tools oder Software beantragen.</div>
+      </div>
+    </a>
+  </div>
+  <script>
+    // Set banner background image
+    document.getElementById('banner').style.backgroundImage = 'url(./banner.png)';
+  </script>
+</body>
+</html>

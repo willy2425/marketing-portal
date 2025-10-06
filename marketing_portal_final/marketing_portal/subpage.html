@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Marketing Anfrage auswählen</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9fb;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    .request-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 12px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: box-shadow 0.2s ease;
+    }
+    .request-item:hover {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    .request-item .name {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #0078d4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="categoryHeading">Marketing Anfragen</h1>
+    <p>Bitte wählen Sie einen Anfragetyp aus:</p>
+    <div id="requestList"></div>
+    <a class="back-link" href="index.html">Zurück zum Portal</a>
+  </div>
+  <script>
+    // Define requests for each category
+    const requestMapping = {
+      allgemein: {
+        title: 'Allgemeine Marketing‑Anfragen',
+        requests: [
+          { name: 'Frage zur Markenstrategie', type: 'allgemein' },
+          { name: 'Zielgruppenanalyse', type: 'allgemein' },
+          { name: 'Allgemeine Beratung', type: 'allgemein' }
+        ]
+      },
+      kampagne: {
+        title: 'Kampagnen & Projekte',
+        requests: [
+          { name: 'Neue Kampagne planen', type: 'kampagne' },
+          { name: 'Event koordinieren', type: 'kampagne' },
+          { name: 'Projektberatung', type: 'kampagne' }
+        ]
+      },
+      design: {
+        title: 'Design & Kreativleistungen',
+        requests: [
+          { name: 'Grafikdesign anfordern', type: 'design' },
+          { name: 'Präsentation gestalten lassen', type: 'design' },
+          { name: 'Video/Multimedia erstellen', type: 'design' }
+        ]
+      },
+      zugang: {
+        title: 'Zugänge & Tools',
+        requests: [
+          { name: 'CRM‑Zugang beantragen', type: 'zugang' },
+          { name: 'Analytics Dashboard Zugang', type: 'zugang' },
+          { name: 'Marketing‑Automation Zugang', type: 'zugang' }
+        ]
+      }
+    };
+
+    // On load, get category param and build list
+    window.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get('category');
+      const config = requestMapping[category] || { title: 'Marketing Anfragen', requests: [] };
+      document.getElementById('categoryHeading').textContent = config.title;
+      const listContainer = document.getElementById('requestList');
+      config.requests.forEach(function(req) {
+        const link = document.createElement('a');
+        link.href = 'form.html?type=' + encodeURIComponent(req.type);
+        link.className = 'request-item';
+        link.innerHTML = '<span class="name">' + req.name + '</span>';
+        listContainer.appendChild(link);
+      });
+    });
+  </script>
+</body>
+</html>

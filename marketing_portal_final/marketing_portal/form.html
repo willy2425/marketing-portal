@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Marketing Anfrage</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9fb;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    form label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    input[type="text"], input[type="email"], textarea, select, input[type="date"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .row {
+      display: flex;
+      gap: 20px;
+    }
+    .row > div {
+      flex: 1;
+    }
+    button {
+      margin-top: 25px;
+      padding: 10px 20px;
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="heading">Marketing Anfrage</h1>
+    <form id="requestForm" onsubmit="alert('Dies ist nur ein Prototyp. Das Formular wird nicht gesendet.'); return false;">
+      <label for="summary">Zusammenfassung *</label>
+      <input type="text" id="summary" name="summary" required placeholder="z. B. Neue Social‑Media‑Kampagne">
+
+      <label for="description">Beschreibung *</label>
+      <textarea id="description" name="description" rows="6" required placeholder="Beschreiben Sie Ihr Anliegen ausführlich…"></textarea>
+
+      <div id="additionalFields"></div>
+
+      <label for="approver">Genehmiger *</label>
+      <input type="text" id="approver" name="approver" required placeholder="Name oder E‑Mail des Vorgesetzten">
+
+      <button type="submit">Senden</button>
+    </form>
+  </div>
+  <script>
+    const typeMapping = {
+      allgemein: {
+        title: 'Allgemeine Marketing‑Anfrage',
+        fields: function() {
+          return '';
+        }
+      },
+      kampagne: {
+        title: 'Kampagnen‑/Projektanfrage',
+        fields: function() {
+          return `
+            <label for="goals">Ziele *</label>
+            <input type="text" id="goals" name="goals" required placeholder="Was soll erreicht werden?">
+
+            <label for="target">Zielgruppe</label>
+            <input type="text" id="target" name="target" placeholder="Wer wird angesprochen?">
+
+            <div class="row">
+              <div>
+                <label for="startdate">Startdatum</label>
+                <input type="date" id="startdate" name="startdate">
+              </div>
+              <div>
+                <label for="enddate">Enddatum</label>
+                <input type="date" id="enddate" name="enddate">
+              </div>
+            </div>
+
+            <label for="budget">Budget (optional)</label>
+            <input type="text" id="budget" name="budget" placeholder="z. B. 5.000 €">
+          `;
+        }
+      },
+      design: {
+        title: 'Design‑ & Kreativanfrage',
+        fields: function() {
+          return `
+            <label for="medium">Medium *</label>
+            <select id="medium" name="medium" required>
+              <option value="">Bitte wählen…</option>
+              <option value="social">Social Media</option>
+              <option value="print">Print</option>
+              <option value="web">Web/Banner</option>
+              <option value="presentation">Präsentation</option>
+            </select>
+
+            <label for="format">Format/Abmessungen</label>
+            <input type="text" id="format" name="format" placeholder="z. B. 1080×1920 px">
+
+            <label for="style">Gewünschter Stil/Farbwelt</label>
+            <input type="text" id="style" name="style" placeholder="z. B. modern, hellblau">
+
+            <label for="deadline">Deadline</label>
+            <input type="date" id="deadline" name="deadline">
+          `;
+        }
+      },
+      zugang: {
+        title: 'Zugangs‑ & Toolanfrage',
+        fields: function() {
+          return `
+            <label for="tool">Tool/System *</label>
+            <select id="tool" name="tool" required>
+              <option value="">Bitte wählen…</option>
+              <option value="crm">CRM‑System</option>
+              <option value="marketing_automation">Marketing‑Automation</option>
+              <option value="analytics">Analytics Dashboard</option>
+              <option value="social_tool">Social‑Media‑Tool</option>
+            </select>
+
+            <label for="access_type">Zugriffsart *</label>
+            <select id="access_type" name="access_type" required>
+              <option value="">Bitte wählen…</option>
+              <option value="lesen">Lesen</option>
+              <option value="schreiben">Schreiben</option>
+              <option value="admin">Admin</option>
+            </select>
+
+            <label for="reason">Begründung *</label>
+            <textarea id="reason" name="reason" rows="3" required placeholder="Warum wird der Zugang benötigt?"></textarea>
+          `;
+        }
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const type = params.get('type');
+      const mapping = typeMapping[type] || { title: 'Marketing Anfrage', fields: function() { return ''; } };
+      document.getElementById('heading').textContent = mapping.title;
+      document.getElementById('additionalFields').innerHTML = mapping.fields();
+    });
+  </script>
+</body>
+</html>
